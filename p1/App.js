@@ -1,55 +1,55 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
-import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail,
-   Text, Left, Body, Icon, Footer,FooterTab, Button, Content, Badge } from 'native-base';
-const cards = [
-  {
-    text: 'Card One',
-    name: 'One',
-    image: require('./img/img1.jpg'),
-  },
-  {
-    text: 'Card two',
-    name: 'Two',
-    image: require('./img/img2.jpg'),
-  },
-  {
-    text: 'Card Three',
-    name: 'Three',
-    image: require('./img/img3.jpg'),
-  },
+import { ListView } from 'react-native';
+import { Container, Header, Content, Button, Icon, List, ListItem, Text,
+Footer,FooterTab, Badge } from 'native-base';
+const datas = [
+  'Simon Mignolet',
+  'Nathaniel Clyne',
+  'Dejan Lovren',
+  'Mama Sakho',
+  'Alberto Moreno',
+  'Emre Can',
+  'Joe Allen',
+  'Phil Coutinho',
 ];
-export default class DeckSwiperExample extends Component {
+export default class SwipeableListExample extends Component {
+  constructor(props) {
+    super(props);
+    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    this.state = {
+      basic: true,
+      listViewData: datas,
+    };
+  }
+  deleteRow(secId, rowId, rowMap) {
+    rowMap[`${secId}${rowId}`].props.closeRow();
+    const newData = [...this.state.listViewData];
+    newData.splice(rowId, 1);
+    this.setState({ listViewData: newData });
+  }
   render() {
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <Container>
         <Header />
         <Content>
-        <View>
-          <DeckSwiper
-            dataSource={cards}
-            renderItem={item =>
-              <Card style={{ elevation: 3 }}>
-                <CardItem>
-                  <Left>
-                    <Thumbnail source={item.image} />
-                    <Body>
-                      <Text>{item.text}</Text>
-                      <Text note>NativeBase</Text>
-                    </Body>
-                  </Left>
-                </CardItem>
-                <CardItem cardBody>
-                  <Image style={{ height: 300, flex: 1 }} source={item.image} />
-                </CardItem>
-                <CardItem>
-                  <Icon name="heart" style={{ color: '#ED4A6A' }} />
-                  <Text>{item.name}</Text>
-                </CardItem>
-              </Card>
-            }
+          <List
+            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+            renderRow={data =>
+              <ListItem>
+                <Text> {data} </Text>
+              </ListItem>}
+            renderLeftHiddenRow={data =>
+              <Button full onPress={() => alert(data)}>
+                <Icon active name="information-circle" />
+              </Button>}
+            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+              <Button full danger onPress={_ => this.deleteRow(secId, rowId, rowMap)}>
+                <Icon active name="trash" />
+              </Button>}
+            leftOpenValue={75}
+            rightOpenValue={-75}
           />
-        </View>
         </Content>
         <Footer>
           <FooterTab>
