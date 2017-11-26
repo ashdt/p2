@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
-import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail,
-   Text, Left, Body, Icon, Footer,FooterTab, Button, Content, Badge } from 'native-base';
+import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
 const cards = [
   {
     text: 'Card One',
@@ -24,7 +23,6 @@ export default class DeckSwiperExample extends Component {
     return (
       <Container>
         <Header />
-        <Content>
         <View>
           <DeckSwiper
             dataSource={cards}
@@ -50,28 +48,6 @@ export default class DeckSwiperExample extends Component {
             }
           />
         </View>
-        </Content>
-        <Footer>
-          <FooterTab>
-            <Button>
-            <Badge ><Text>51</Text></Badge>
-              <Icon name="apps" />
-              <Text>Apps</Text>
-            </Button>
-            <Button>
-              <Icon name="camera" />
-              <Text>Camera</Text>
-            </Button>
-            <Button active>
-              <Icon active name="navigate" />
-              <Text>Navigate</Text>
-            </Button>
-            <Button>
-              <Icon name="person" />
-              <Text>Person</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }
