@@ -1,23 +1,40 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default class App extends React.Component {
+import React, { Component } from 'react';
+import { Container, Header,Button,Icon, Content, Card, CardItem, Text, 
+  Body,ListItem, CheckBox } from 'native-base';
+export default class CardHeaderFooterExample extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!!!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Container>
+        <Header />
+        <Content>
+          <Card>
+            <CardItem header>
+              <Text>NativeBase</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>
+                  //Your text here
+                </Text>
+                <Button  primary><Text> Primary </Text></Button>
+                <Button small iconLeft light>
+                  <Icon name='home' />
+                <Text> Light </Text></Button>
+               
+              </Body>
+            </CardItem>
+            <CardItem footer>
+              <Text>GeekyAnts</Text>
+            </CardItem>
+         </Card>
+         <ListItem>
+            <CheckBox checked={true} />
+            <Body>
+              <Text>Daily Stand Up</Text>
+            </Body>
+          </ListItem>
+        </Content>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
