@@ -12,6 +12,9 @@ const datas = [
   'Joe Allen',
   'Phil Coutinho',
 ];
+let pic = {
+  uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+};
 export default class SwipeableListExample extends Component {
   constructor(props) {
     super(props);
