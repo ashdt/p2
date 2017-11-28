@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { ListView, Image, Alert } from 'react-native';
+import { ListView } from 'react-native';
 import { Container, Header, Content, Button, Icon, List, ListItem, Text,
-Footer,FooterTab, Badge } from 'native-base';
+Footer,FooterTab, Badge,Image } from 'native-base';
 const datas = [
   'Simon Mignolet',
   'Nathaniel Clyne',
   'Dejan Lovren',
   'Mama Sakho',
+  'Alberto Moreno',
+  'Emre Can',
+  'Joe Allen',
   'Phil Coutinho',
 ];
 
@@ -25,12 +28,11 @@ export default class SwipeableListExample extends Component {
     newData.splice(rowId, 1);
     this.setState({ listViewData: newData });
   }
-  _onPressButton() {
-    Alert.alert('You tapped the button!')
-  }
- 
+  
   render() {
-    let pic = {  uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'};
+    let pic = {
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+    };
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <Container>
@@ -39,9 +41,8 @@ export default class SwipeableListExample extends Component {
           <List
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
             renderRow={data =>
-              
               <ListItem>
-                <Text> {data} </Text>                
+                <Text> {data} </Text>
               </ListItem>}
             renderLeftHiddenRow={data =>
               <Button full onPress={() => alert(data)}>
@@ -56,10 +57,6 @@ export default class SwipeableListExample extends Component {
           />
           <Text>Hello!!</Text>
           <Icon active name="thumbs-up" />
-          <Button full onPress={this._onPressButton} title="Hi"/>
-
-          <Image source={pic} style={{width: 193, height: 110}}/>
-
           </Content>
         <Footer>
           <FooterTab>
